@@ -1,0 +1,26 @@
+contact.email.command        mutt -s "Munin ${var:group}::${var:host}" <%= node[:munin][:master][:email] %>
+contact.email.max_messages   <%= node[:munin][:master][:max_messages] %>
+contact.email.always_send    <%= node[:munin][:master][:always_send] %>
+
+dbdir   /var/lib/munin
+htmldir /var/cache/munin/www
+logdir /var/log/munin
+rundir  /var/run/munin
+
+tmpldir /etc/munin/templates
+
+staticdir /etc/munin/static
+
+includedir /etc/munin/munin-conf.d
+
+graph_strategy cgi
+munin_cgi_graph_jobs 6
+
+cgiurl_graph /munin-cgi/munin-cgi-graph
+html_strategy cron
+
+max_processes 16
+
+[<%= node[:munin][:master][:hostname] %>]
+    address 127.0.0.1
+    use_node_name yes

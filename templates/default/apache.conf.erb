@@ -1,0 +1,40 @@
+# tamac munin settings
+Alias /munin /var/cache/munin/www
+
+Alias /munin-cgi/static /var/cache/munin/www/static
+ScriptAlias /munin-cgi/munin-cgi-graph /usr/lib/munin/cgi/munin-cgi-graph
+ScriptAlias /munin-cgi /usr/lib/munin/cgi/munin-cgi-html
+
+<Directory /var/cache/munin/www>
+        Order allow,deny
+        Allow from all
+        Options None
+
+    <IfModule mod_expires.c>
+        ExpiresActive On
+      ExpiresDefault M310
+    </IfModule>
+
+</Directory> 
+
+<Location /munin-cgi>
+    <IfModule mod_fastcgi.c>
+        SetHandler fastcgi-script
+    </IfModule>
+</Location>
+
+<Location /munin-cgi/static>
+  SetHandler None
+</Location>
+
+<Location /munin-cgi/munin-cgi-graph>
+        <IfModule mod_fastcgi.c>
+                SetHandler fastcgi-script
+        </IfModule>
+</Location>
+
+<Location /munin-cgi/munin-cgi-html>
+        <IfModule mod_fastcgi.c>
+                SetHandler fastcgi-script
+        </IfModule>
+</Location>
