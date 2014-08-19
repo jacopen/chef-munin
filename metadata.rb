@@ -6,6 +6,8 @@ description      'Installs/Configures munin'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 version          '1.0.0'
 
+depends 'apt'
+
 recipe "munin", "setup master and node"
 recipe "munin::master", "setup master"
 recipe "munin::node", "setup node"
